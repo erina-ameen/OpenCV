@@ -13,4 +13,9 @@ cv2.imshow("Blur 1", blurred1)
 #Median Blur
 blurred2=cv2.medianBlur(resized, 5)
 cv2.imshow("Blur 2", blurred2)
+#cv2.waitKey(0)
+
+#Bilateral Blur
+blurred3=cv2.bilateralFilter(resized, 7, 78,90)
+cv2.imshow("Blur 3", blurred3)
 cv2.waitKey(0)
