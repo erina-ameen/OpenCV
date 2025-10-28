@@ -31,3 +31,14 @@ circle_thickness=1
 circle_img=cv2.circle(bridge, start_c, radius, circle_colour, circle_thickness)
 cv2.imshow("Circled Image", circle_img)
 cv2.waitKey(0)
+
+#Writing Text
+start_t=(50,550)
+
+txt_font=cv2.FONT_HERSHEY_COMPLEX
+txt_size=3
+txt_colour=(255,0,255)
+txt_thickness=3
+txt_img=cv2.putText(bridge, "Drawing Elements", start_t, txt_font, txt_size, txt_colour, txt_thickness, cv2.LINE_4)
+cv2.imshow("Texted Image", circle_img)
+cv2.waitKey(0)
