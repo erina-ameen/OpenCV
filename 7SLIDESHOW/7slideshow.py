@@ -24,8 +24,27 @@ print(avg_height)
 
 #Resizing and saving images
 for i in os.listdir("."):
-    if i.endswith((".jpg",".jpeg",".png")):
+    if i.endswith(".jpg") or i. endswith (".jpeg") or i. endswith (".png"):
         image=Image.open(os.path.join(path, i))
         resized_img=image.resize((avg_width, avg_height), Image.Resampling.LANCZOS)
         resized_img.save(i, "JPEG", quality=95)
         print(i, "is resized")
+
+#Function for video generation
+def generate():
+    vid_name="video1.avi"
+    os.chdir(r"D:\ERINA\Jet Learn\VS Code OpenCV\7SLIDESHOW\images")
+    slide_images=[]
+    for i in os.listdir("."):
+        if i.endswith(".jpg") or i. endswith (".jpeg") or i. endswith (".png"):
+            slide_images.append(i)
+    print(slide_images)
+    frame=cv2.imread(os.path.join(".", slide_images[0]))
+    height, width, layers=frame.shape
+    vid_store=cv2.VideoWriter(vid_name, 0, 0.5, (width, height))
+    for img in slide_images:
+        vid_store.write(cv2.imread(os.path.join(".", img)))
+    cv2.destroyAllWindows()
+    vid_store.release()
+
+generate()
