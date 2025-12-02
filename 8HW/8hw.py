@@ -36,12 +36,12 @@ while raw.isOpened():
     converted_frame=cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     #Range for blue colour
     #lower blue
-    lower_b=np.array([46, 55, 76])
-    upper_b=np.array([44, 55, 89])
+    lower_b=np.array([90, 80, 20])
+    upper_b=np.array([120, 255, 120])
     mask1=cv2.inRange(converted_frame, lower_b, upper_b)
     #darker blue
-    lower_b2=np.array([35, 57, 86])
-    upper_b2=np.array([62, 97, 141])
+    lower_b2=np.array([100, 50, 10])
+    upper_b2=np.array([130, 255, 80])
     mask2=cv2.inRange(converted_frame, lower_b2, upper_b2)
     #combining the masks
     combo_mask=mask1+mask2
