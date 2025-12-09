@@ -13,6 +13,12 @@ def sepiaFilter(frame):
    frame_p=cv2.transform(frame, sepia)
    return np.clip(frame_p, 0, 255).astype(np.uint8)
 
+#function for cartoon filter
+def cartoonFilter(frame):
+   gray=cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+   blur=cv2.medianBlur(gray, 5)
+   edges=cv2.adaptiveThreshold(blur, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 9, 9)
+
 #Opening webcam
 camera=cv2.VideoCapture(0)
 filter_type="Original"
@@ -23,6 +29,12 @@ while True:
    #applying selected filter
    if filter_type=="Grayscale":
       frame_img=cv2.cvtColor(frame_img, cv2.COLOR_BGR2GRAY)
+   if filter_type=="Sepia":
+      frame_img=sepiaFilter(frame_img)
+   if filter_type=="Negative":
+      frame_img=cv2.bitwise_not(frame_img)
+   if filter_type=="Cartoon":
+      frame_img=(frame_img)
    cv2.imshow("Filters", frame_img)
    #key event
    key=cv2.waitKey(1)
