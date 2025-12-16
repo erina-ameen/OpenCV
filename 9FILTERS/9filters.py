@@ -18,6 +18,9 @@ def cartoonFilter(frame):
    gray=cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
    blur=cv2.medianBlur(gray, 5)
    edges=cv2.adaptiveThreshold(blur, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 9, 9)
+   smooth_img=cv2.bilateralFilter(frame, 8, 275, 275)
+   final=cv2.bitwise_and(smooth_img, smooth_img, mask=edges)
+   return final
 
 #Opening webcam
 camera=cv2.VideoCapture(0)
@@ -34,7 +37,8 @@ while True:
    if filter_type=="Negative":
       frame_img=cv2.bitwise_not(frame_img)
    if filter_type=="Cartoon":
-      frame_img=(frame_img)
+      frame_img=cartoonFilter(frame_img)
+   
    cv2.imshow("Filters", frame_img)
    #key event
    key=cv2.waitKey(1)
