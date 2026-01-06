@@ -44,8 +44,8 @@ def generate():
     vid_store=cv2.VideoWriter(vid_name, 0, 0.5, (width, height))
     for img in slide_images:
         frame=cv2.imread(os.path.join(".", img))
-        cv2.putText(frame, "Hobby Ideas", (10, 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,0), 2,cv2.LINE_AA)
-        vid_store.write(cv2.imread(os.path.join(".", img)))
+        cv2.putText(frame, "Hobby Ideas", (300,500), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,0), 2,cv2.LINE_AA)
+        vid_store.write(frame)
     cv2.destroyAllWindows()
     vid_store.release()
 
