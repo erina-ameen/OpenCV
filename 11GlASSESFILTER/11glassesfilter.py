@@ -26,7 +26,8 @@ def overlay(bg, img, x, y):
         return bg
     transparancy=img[:,:,3]/255.0
     for i in range(3):
-        bg[y:y+img_height, x:x+img_width, i]
+        bg[y:y+img_height, x:x+img_width, i]=(1-transparancy)*bg[y:y+img_height, x:x+img_width, i]+transparancy*img[:,:,i]
+    return bg
 
 while True:
     ret, frame=camera.read()
@@ -39,7 +40,7 @@ while True:
             glass_w=width
             glass_h=int(glass_w/aspect_ratio1)
             resized_glasses1=cv2.resize(glasses1_read, (glass_w, glass_h))
-            frame=overlay(frame, resized_glasses1, x, y)
+            frame=overlay(frame, resized_glasses1, x, y+70)
     if isinstance(frame, np.ndarray) and len(frame.shape)==2:
         frame=cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     cv2.imshow("Screen", frame)
