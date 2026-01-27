@@ -45,6 +45,30 @@ while True:
         frame=cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     cv2.imshow("Screen", frame)
 
+    if filter_type=="Glasses 2":
+        grayscale=cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        faces_list=face_detector.detectMultiScale(grayscale, 1.1, 3)
+        for (x, y, width, height) in faces_list:
+            glass_w=width
+            glass_h=int(glass_w/aspect_ratio1)
+            resized_glasses2=cv2.resize(glasses2_read, (glass_w, glass_h))
+            frame=overlay(frame, resized_glasses2, x, y+70)
+    if isinstance(frame, np.ndarray) and len(frame.shape)==2:
+        frame=cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    cv2.imshow("Screen", frame)
+
+    if filter_type=="Glasses 3":
+        grayscale=cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        faces_list=face_detector.detectMultiScale(grayscale, 1.1, 3)
+        for (x, y, width, height) in faces_list:
+            glass_w=width
+            glass_h=int(glass_w/aspect_ratio1)
+            resized_glasses3=cv2.resize(glasses3_read, (glass_w, glass_h))
+            frame=overlay(frame, resized_glasses3, x, y+70)
+    if isinstance(frame, np.ndarray) and len(frame.shape)==2:
+        frame=cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    cv2.imshow("Screen", frame)
+
     #setting filter according to the keys
     key=cv2.waitKey(1)
     if key==ord("0"):
