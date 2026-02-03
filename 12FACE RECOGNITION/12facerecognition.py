@@ -3,9 +3,9 @@ import os
 
 face_detector=cv2.CascadeClassifier(cv2.data.haarcascades+'haarcascade_frontalface_default.xml')
 data_set=r"D:\ERINA\Jet Learn\VS Code OpenCV\12FACE RECOGNITION\data set"
-data_set_erina=r"D:\ERINA\Jet Learn\VS Code OpenCV\12FACE RECOGNITION\data set\erina"
+#data_set_erina=r"D:\ERINA\Jet Learn\VS Code OpenCV\12FACE RECOGNITION\data set\erina"
 
-joined_path=os.path.join(data_set, data_set_erina)
+joined_path=os.path.join(data_set, "erina")
 
 #creating a new folder that doesn't exist
 if not os.path.isdir(joined_path):
@@ -16,8 +16,7 @@ if not os.path.isdir(joined_path):
 #load=cv2.CascadeClassifier(face_detector)
 camera=cv2.VideoCapture(0)
 counter=0
-while counter<50:
-
+while counter<30:
     ret, frame=camera.read()
     if not ret:
         print("Frame was not read.")
@@ -30,11 +29,18 @@ while counter<50:
         cv2.rectangle(frame, (x, y), (x+width, y+height), (200,0,255), 3)
         saved_face=gray_frame[y:y+height, x:x+width]
         resized_face=cv2.resize(saved_face, (width, height))
-        cv2.imwrite('%s/%s,png'%(joined_path, counter), resized_face)
-    counter+=1
+        print("Hello")
+        cv2.imwrite(f"{joined_path}/{counter}.png", resized_face)
+        print("Hello2")
+        counter+=1
 
     cv2.imshow("Screen", frame)
-    key=cv2.waitKey(0)
+    key=cv2.waitKey(1)
 
     if key==27:
         break
+
+camera.release()
+cv2.destroyAllWindows()
+
+print("Photos captured.")
