@@ -29,6 +29,8 @@ while counter<50:
     for (x, y, width, height) in faces_list:
         cv2.rectangle(frame, (x, y), (x+width, y+height), (200,0,255), 3)
         saved_face=gray_frame[y:y+height, x:x+width]
+        resized_face=cv2.resize(saved_face, (width, height))
+        cv2.imwrite('%s/%s,png'%(joined_path, counter), resized_face)
     counter+=1
 
     cv2.imshow("Screen", frame)
